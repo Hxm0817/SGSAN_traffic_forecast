@@ -13,7 +13,7 @@ def set_seed(seed):
 
 def main():
     args = get_args()
-    # args.func = "CISTA_2" # Options: "CISTA_1"(single-stage), "CISTA_2"(two-stage), "STA"(no causal module)
+    # args.func = "SGSAN_2" # Options: "SGSAN_1"(single-stage), "SGSAN_2"(two-stage), "STA"(no causal module)
 
     set_seed(30)
 
