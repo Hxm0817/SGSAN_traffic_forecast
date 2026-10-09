@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class CiSTAGNN(nn.Module):
+class SGSANGNN(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim, seq_len, num_nodes, num_heads, dropout):
         super().__init__()
         self.input_proj = nn.Sequential(nn.Linear(input_dim, hidden_dim), nn.ReLU())
@@ -47,7 +47,7 @@ class CiSTAGNN(nn.Module):
             loss_sparse = torch.norm(self.dag_generator.adj_A, p=1)
 
         elif mode == "pretrain":
-            # Only when using CISTA_2
+            # Only when using SGSAN_2
             h2, causal_adj = self.dag_generator(h1)
             h_out = F.relu(h2 + self.gcn(h2, causal_adj))
             h_out = torch.matmul(causal_adj, h_out)
