@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 from utils import load_data, generate_dataset, get_normalized_adj
-from net import CiSTAGNN
+from net import SGSANGNN
 
 
 class Trainer:
@@ -38,7 +38,7 @@ class Trainer:
         self.A_wave = torch.from_numpy(get_normalized_adj(A)).float().to(self.device)
 
     def _init_model(self):
-        self.model = CiSTAGNN(
+        self.model = SGSANGNN(
             input_dim=self.train_x.shape[3],
             hidden_dim=self.args.hid_dim,
             output_dim=1,
@@ -58,8 +58,8 @@ class Trainer:
             self.model.train()
 
             mode = "train"
-            if self.args.func == 'CISTA_2':
-                # Only when using CISTA_2, pretrain the model (stage 1)
+            if self.args.func == 'SGSAN_2':
+                # Only when using SGSAN_2, pretrain the model (stage 1)
                 mode = "pretrain" if epoch < self.args.pretrain_epochs else "finetune"
 
             permutation = torch.randperm(self.train_x.shape[0])
@@ -104,7 +104,7 @@ class Trainer:
             x = self.test_x.to(self.device)
             y = self.test_y.to(self.device)
 
-            mode = "test_direct" if self.args.func == "CISTA_1" else "test"
+            mode = "test_direct" if self.args.func == "SGSAN_1" else "test"
             out, _ = self.model(self.A_wave, x, mode=mode)
 
             # Un-normalize
