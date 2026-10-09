@@ -1,6 +1,6 @@
-# Causality-Informed Spatiotemporal Graph Neural Network (CiSTA-GNN) for Trustworthy Traffic Flow Prediction
+# Structure-guided Spatiotemporal Attention Graph Neural Network (SGSAN) for Traffic Flow Prediction
 
-This repository contains the implementation of the proposed CiSTA-GNN model for traffic flow prediction.
+This repository contains the implementation of the proposed SGSAN model for traffic flow prediction.
 
 ## Repository Structure
 
@@ -16,7 +16,7 @@ This repository contains the implementation of the proposed CiSTA-GNN model for 
 ```
 
 ## Model training
-The repository contains 3 training frameworks mentioned in the paper: "CISTA_1"(single-stage training), "CISTA_2"(two-stage training), and "STA"(training without the causal module). An example to train the model is as follows:
+The repository contains 3 training frameworks mentioned in the paper: "SGSAN_1"(single-stage training), "SGSAN_2"(two-stage training), and "STA"(training without the structure discovery module). An example to train and test the model is as follows:
 
 ```bash
-python main.py --dataset PEMS08 --func CISTA_2 --num_timesteps_output 6
+python main.py --dataset PEMS08 --func SGSAN_2 --num_timesteps_output 6
